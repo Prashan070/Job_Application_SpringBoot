@@ -15,4 +15,6 @@ public interface JobService {
     public JobResponseDTO getJobById(JobRequestDTO jobRequestDTO);
 
     public boolean deleteJobById(JobRequestDTO jobRequestDTO);
+
+    public boolean updateExistingJob(JobRequestDTO jobRequestDTO);
 }

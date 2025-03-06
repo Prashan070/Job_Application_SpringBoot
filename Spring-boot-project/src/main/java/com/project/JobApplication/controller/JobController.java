@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
+
 import java.util.List;
 
 @RestController
@@ -66,13 +66,19 @@ public class JobController {
 
 
     @PutMapping("/{id}")
+    public ResponseEntity<String> updateExistingJob(@PathVariable("id") Long jobid, @RequestBody JobRequestDTO jobRequestDTO) {
 
+        jobRequestDTO.setJobIdReqDTO(jobid);
 
+        boolean isUpdated = jobService.updateExistingJob(jobRequestDTO);
 
+        if (isUpdated) {
+            return new ResponseEntity<>("Job has been updated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-
-
-
+    }
 
 
 }
