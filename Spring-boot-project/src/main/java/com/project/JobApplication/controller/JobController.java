@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/jobs")
@@ -44,11 +45,14 @@ public class JobController {
         jobRequestDTO.setJobIdReqDTO(jobId);
 
         JobResponseDTO jobResponseDTO = jobService.getJobById(jobRequestDTO);
-        if (jobResponseDTO != null) {
+        /*if (jobResponseDTO != null) {
             return new ResponseEntity<>(jobResponseDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        }*/
+
+        return ResponseEntity.of(Optional.ofNullable(jobResponseDTO));
+
     }
 
     @DeleteMapping("/{id}")
@@ -79,6 +83,8 @@ public class JobController {
         }
 
     }
+
+
 
 
 }

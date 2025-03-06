@@ -17,6 +17,8 @@ public class Job {
 
     private String jobLocation;
 
+    private Long jobSalary;
+
     @Column(name = "jobDetails")
     private String jobDescription;
 
@@ -52,10 +54,19 @@ public class Job {
         this.jobDescription = jobDescription;
     }
 
-    public Job(Long jobId, String jobName, String jobLocation, String jobDescription) {
+    public Long getJobSalary() {
+        return jobSalary;
+    }
+
+    public void setJobSalary(Long jobSalary) {
+        this.jobSalary = jobSalary;
+    }
+
+    public Job(Long jobId, String jobName, String jobLocation, Long jobSalary, String jobDescription) {
         this.jobId = jobId;
         this.jobName = jobName;
         this.jobLocation = jobLocation;
+        this.jobSalary = jobSalary;
         this.jobDescription = jobDescription;
     }
 

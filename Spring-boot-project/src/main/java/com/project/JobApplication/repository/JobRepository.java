@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface JobRepository extends JpaRepository<Job, Long> {
 
 
+    //max salary
+    //second max salary;
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -24,6 +25,7 @@ public class JobServiceImpl implements JobService {
         Job job = new Job(null,
                 jobRequestDTO.getJobNameReqDTO(),
                 jobRequestDTO.getJobLocationReqDTO(),
+                jobRequestDTO.getJobSalaryReqDTO(),
                 jobRequestDTO.getJobDescriptionReqDTO());
         jobRepository.save(job);
         return true;
@@ -38,27 +40,75 @@ public class JobServiceImpl implements JobService {
             jobResponseDTO.add(new JobResponseDTO(jobs.getJobId(),
                     jobs.getJobName(),
                     jobs.getJobDescription(),
-                    jobs.getJobLocation()));
+                    jobs.getJobLocation(),
+                    jobs.getJobSalary()));
         }
         return jobResponseDTO;
     }
 
     @Override
     public JobResponseDTO getJobById(JobRequestDTO jobRequestDTO) {
+
+        Optional<Job> existingJob = jobRepository.findById(jobRequestDTO.getJobIdReqDTO());
+
+        if (existingJob.isPresent()) {
+
+            Job resultJob = existingJob.get();
+
+            return new JobResponseDTO(resultJob.getJobId(),
+                    resultJob.getJobName(),
+                    resultJob.getJobLocation(),
+                    resultJob.getJobDescription(),
+                    resultJob.getJobSalary());
+
+        }
         return null;
     }
 
     @Override
     public boolean deleteJobById(JobRequestDTO jobRequestDTO) {
 
-
+        boolean isAvaiable = jobRepository.existsById(jobRequestDTO.getJobIdReqDTO());
+        if (isAvaiable) {
+            jobRepository.deleteById(jobRequestDTO.getJobIdReqDTO());
+            return true;
+        }
         return false;
     }
+
 
     @Override
     public boolean updateExistingJob(JobRequestDTO jobRequestDTO) {
+
+        Optional<Job> existingJobOpt = jobRepository.findById(jobRequestDTO.getJobIdReqDTO());
+
+        if (existingJobOpt.isPresent()) {
+
+            Job existingJob = existingJobOpt.get();
+
+            if (jobRequestDTO.getJobDescriptionReqDTO() != null && !jobRequestDTO.getJobDescriptionReqDTO().isBlank()) {
+                existingJob.setJobDescription(jobRequestDTO.getJobDescriptionReqDTO());
+            }
+            if (jobRequestDTO.getJobNameReqDTO() != null && !jobRequestDTO.getJobNameReqDTO().isBlank()) {
+                existingJob.setJobName(jobRequestDTO.getJobNameReqDTO());
+            }
+            if (jobRequestDTO.getJobLocationReqDTO() != null && !jobRequestDTO.getJobLocationReqDTO().isBlank()) {
+                existingJob.setJobLocation(jobRequestDTO.getJobLocationReqDTO());
+            }
+            if (jobRequestDTO.getJobSalaryReqDTO() != null) {
+                existingJob.setJobSalary(jobRequestDTO.getJobSalaryReqDTO());
+            }
+
+            jobRepository.save(existingJob);
+
+            return true;
+        }
         return false;
+
+
     }
 
-
 }
+
+
+

@@ -11,6 +11,8 @@ public class JobRequestDTO {
 
     private String jobDescriptionReqDTO;
 
+    private Long jobSalaryReqDTO;
+
     public Long getJobIdReqDTO() {
         return jobIdReqDTO;
     }
@@ -43,11 +45,20 @@ public class JobRequestDTO {
         this.jobDescriptionReqDTO = jobDescriptionReqDTO;
     }
 
-    public JobRequestDTO(Long jobIdReqDTO, String jobNameReqDTO, String jobLocationReqDTO, String jobDescriptionReqDTO) {
+    public Long getJobSalaryReqDTO() {
+        return jobSalaryReqDTO;
+    }
+
+    public void setJobSalaryReqDTO(Long jobSalaryReqDTO) {
+        this.jobSalaryReqDTO = jobSalaryReqDTO;
+    }
+
+    public JobRequestDTO(Long jobIdReqDTO, String jobNameReqDTO, String jobLocationReqDTO, String jobDescriptionReqDTO, Long jobSalaryReqDTO) {
         this.jobIdReqDTO = jobIdReqDTO;
         this.jobNameReqDTO = jobNameReqDTO;
         this.jobLocationReqDTO = jobLocationReqDTO;
         this.jobDescriptionReqDTO = jobDescriptionReqDTO;
+        this.jobSalaryReqDTO = jobSalaryReqDTO;
     }
 
     public JobRequestDTO() {

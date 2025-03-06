@@ -10,6 +10,8 @@ public class JobResponseDTO {
 
     private String jobDescriptionResDTO;
 
+    private Long jobSalaryResDTO;
+
     public Long getJobIdResDTO() {
         return jobIdResDTO;
     }
@@ -43,11 +45,20 @@ public class JobResponseDTO {
     }
 
 
-    public JobResponseDTO(Long jobIdResDTO, String jobNameResDTO, String jobLocationResDTO, String jobDescriptionResDTO) {
+    public Long getJobSalaryResDTO() {
+        return jobSalaryResDTO;
+    }
+
+    public void setJobSalaryResDTO(Long jobSalaryResDTO) {
+        this.jobSalaryResDTO = jobSalaryResDTO;
+    }
+
+    public JobResponseDTO(Long jobIdResDTO, String jobNameResDTO, String jobLocationResDTO, String jobDescriptionResDTO, Long jobSalaryResDTO) {
         this.jobIdResDTO = jobIdResDTO;
         this.jobNameResDTO = jobNameResDTO;
         this.jobLocationResDTO = jobLocationResDTO;
         this.jobDescriptionResDTO = jobDescriptionResDTO;
+        this.jobSalaryResDTO = jobSalaryResDTO;
     }
 
     public JobResponseDTO() {
