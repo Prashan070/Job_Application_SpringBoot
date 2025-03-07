@@ -4,6 +4,8 @@ import com.project.JobApplication.entity.Job;
 import com.project.JobApplication.jobDTO.JobRequestDTO;
 import com.project.JobApplication.jobDTO.JobResponseDTO;
 import com.project.JobApplication.repository.JobRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class JobServiceImpl implements JobService {
 
     private JobRepository jobRepository;
+
 
     public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
@@ -107,6 +110,27 @@ public class JobServiceImpl implements JobService {
 
 
     }
+
+    @Override
+    public List<JobResponseDTO> getJobWithSpecificLocation(JobRequestDTO jobRequestDTO) {
+        List<Job> existJob = jobRepository.findByJobLocation(jobRequestDTO.getJobLocationReqDTO());
+
+        List<JobResponseDTO> jobResponseDTO = new ArrayList<>();
+
+        if (existJob != null) {
+            for (Job jobs : existJob) {
+                jobResponseDTO.add(new JobResponseDTO(jobs.getJobId(),
+                        jobs.getJobName(),
+                        jobs.getJobDescription(),
+                        jobs.getJobLocation(),
+                        jobs.getJobSalary()));
+            }
+            return jobResponseDTO;
+        }
+        return null;
+    }
+
+
 
 }
 

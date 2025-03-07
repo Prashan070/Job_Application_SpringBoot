@@ -84,7 +84,17 @@ public class JobController {
 
     }
 
-    //for particular location
+    @GetMapping("/location/{location}")
+    public ResponseEntity<List<JobResponseDTO>> getJobWithSpecificLocation(@PathVariable("location") String location) {
+
+        JobRequestDTO jobRequestDTO = new JobRequestDTO();
+        jobRequestDTO.setJobLocationReqDTO(location);
+
+        List<JobResponseDTO> jobResponseDTO = jobService.getJobWithSpecificLocation(jobRequestDTO);
+
+        return ResponseEntity.of(Optional.ofNullable(jobResponseDTO));
+    }
+
 
 
 }
