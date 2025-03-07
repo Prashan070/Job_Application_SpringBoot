@@ -14,5 +14,9 @@ public class SpringBootProjectApplication {
 
 
 
+@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
+	}
 
 }
