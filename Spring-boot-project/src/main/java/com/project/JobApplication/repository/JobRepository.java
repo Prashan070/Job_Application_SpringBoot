@@ -10,11 +10,24 @@ import java.util.List;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
 
-
+     //Derived query
      public List<Job> findByJobLocation(String jobLocation);
 
+     //Custom query
 
-    //max salary
+     //Native query
+
+     //Named query
+
+     //Named Native
+
+
+
+
+
+     //max salary
+
+
     //second max salary;
 
 

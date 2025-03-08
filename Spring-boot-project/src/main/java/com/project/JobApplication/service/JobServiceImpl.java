@@ -4,8 +4,6 @@ import com.project.JobApplication.entity.Job;
 import com.project.JobApplication.jobDTO.JobRequestDTO;
 import com.project.JobApplication.jobDTO.JobResponseDTO;
 import com.project.JobApplication.repository.JobRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

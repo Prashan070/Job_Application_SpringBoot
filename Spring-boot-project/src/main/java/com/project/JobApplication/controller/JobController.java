@@ -4,11 +4,10 @@ package com.project.JobApplication.controller;
 import com.project.JobApplication.jobDTO.JobRequestDTO;
 import com.project.JobApplication.jobDTO.JobResponseDTO;
 import com.project.JobApplication.service.JobService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ public class JobController {
 
 
     @PostMapping
-    public ResponseEntity<String> saveNewJob(@RequestBody JobRequestDTO jobRequestDTO) {
+    public ResponseEntity<String> saveNewJob(@Valid @RequestBody JobRequestDTO jobRequestDTO) {
         boolean isSaved = jobService.saveNewJob(jobRequestDTO);
         if (isSaved) {
             return new ResponseEntity<>("Job has been saved", HttpStatus.CREATED);
@@ -45,6 +44,7 @@ public class JobController {
         jobRequestDTO.setJobIdReqDTO(jobId);
 
         JobResponseDTO jobResponseDTO = jobService.getJobById(jobRequestDTO);
+
         /*if (jobResponseDTO != null) {
             return new ResponseEntity<>(jobResponseDTO, HttpStatus.OK);
         } else {

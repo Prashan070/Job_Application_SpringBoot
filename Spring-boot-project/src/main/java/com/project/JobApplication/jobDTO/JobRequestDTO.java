@@ -1,16 +1,23 @@
 package com.project.JobApplication.jobDTO;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.validator.constraints.Length;
+
 public class JobRequestDTO {
 
     private Long jobIdReqDTO;
 
+    @NotBlank(message = "Please add Job name")
     private String jobNameReqDTO;
 
     private String jobLocationReqDTO;
 
+    @Length(max = 20, min =1)
     private String jobDescriptionReqDTO;
 
+    @Positive
     private Long jobSalaryReqDTO;
 
     public Long getJobIdReqDTO() {
